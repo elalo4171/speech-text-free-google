@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>VoiceNotes by elalo417</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Umami Analytics (self-hosted) -->
+  <!-- Cambia UMAMI_WEBSITE_ID por el ID que te da Umami -->
+  <!-- Cambia data-host-url por la URL de tu Umami en Coolify -->
+  <script defer src="/umami/script.js" data-website-id="UMAMI_WEBSITE_ID" data-host-url=""></script>
+</head>
+<body>
+  <div id="app" class="app">
+
+    <!-- ══════ SIDEBAR (desktop only) ══════ -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+        </div>
+        <div>
+          <div class="topbar-title">VoiceNotes</div>
+          <span class="topbar-sub">by @elalo417</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-view="home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Inicio</span>
+        </button>
+        <button class="nav-item" data-view="record">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+          <span>Grabar</span>
+        </button>
+        <button class="nav-item" data-view="projects">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          <span>Proyectos</span>
+        </button>
+        <button class="nav-item" data-view="settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Ajustes</span>
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="https://www.tiktok.com/@elalo417" target="_blank" rel="noopener noreferrer" class="sidebar-social tiktok">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.56a8.2 8.2 0 0 0 4.76 1.52V6.69h-1z"/></svg>
+          <span>TikTok @elalo417</span>
+        </a>
+        <a href="https://www.youtube.com/@elalo4177/videos" target="_blank" rel="noopener noreferrer" class="sidebar-social youtube">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          <span>YouTube @elalo4177</span>
+        </a>
+        <div class="sidebar-version">VoiceNotes v1.0 &middot; 100% gratis</div>
+      </div>
+    </aside>
+
+    <!-- ══════ HOME VIEW ══════ -->
+    <div id="view-home" class="view active">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+          </div>
+          <div>
+            <h1 class="topbar-title">VoiceNotes</h1>
+            <span class="topbar-sub">by @elalo417</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="icon-btn" id="btn-search" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <div id="search-bar" class="search-bar hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="search-input" placeholder="Buscar notas...">
+      </div>
+
+      <div id="home-content" class="scroll-area">
+        <div id="recordings-list" class="recordings-list">
+          <!-- recordings injected here -->
+        </div>
+        <div id="empty-state" class="empty-state">
+          <div class="empty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </div>
+          <h3>Sin notas de voz</h3>
+          <p>Presiona grabar para crear tu primera nota</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ RECORD VIEW ══════ -->
+    <div id="view-record" class="view">
+      <header class="topbar">
+        <button class="icon-btn" id="btn-back-record" aria-label="Volver">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        </button>
+        <h2 class="topbar-center">Grabando</h2>
+        <div style="width:40px"></div>
+      </header>
+
+      <div class="record-body">
+        <div id="rec-status" class="rec-status">
+          <span class="rec-dot"></span>
+          <span>GRABANDO</span>
+        </div>
+
+        <div class="waveform-container">
+          <canvas id="waveform" width="320" height="80"></canvas>
+        </div>
+
+        <div id="timer" class="timer">00:00:00</div>
+
+        <div class="live-transcript-area">
+          <div class="live-header">
+            <div class="live-label">TRANSCRIPCION EN VIVO</div>
+            <button id="btn-copy-live" class="copy-live-btn" title="Copiar texto">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copiar
+            </button>
+          </div>
+          <div id="live-text" class="live-text">Esperando voz...</div>
+        </div>
+
+        <div class="rec-project-selector">
+          <span class="rec-project-label">Proyecto:</span>
+          <select id="rec-project-select" class="rec-project-dropdown">
+            <option value="">Sin proyecto</option>
+          </select>
+        </div>
+
+        <div class="rec-controls">
+          <button id="btn-pause" class="rec-btn pause" aria-label="Pausar">
+            <svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            <span>Pausar</span>
+          </button>
+          <button id="btn-stop" class="rec-btn stop" aria-label="Detener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+            <span>Detener</span>
+          </button>
+        </div>
+
+        <p class="rec-hint">Pulsa detener para guardar la nota</p>
+      </div>
+    </div>
+
+    <!-- ══════ REVIEW VIEW (post-recording) ══════ -->
+    <div id="view-review" class="view">
+      <header class="topbar">
+        <div style="width:40px"></div>
+        <h2 class="topbar-center">Grabaci&oacute;n finalizada</h2>
+        <div style="width:40px"></div>
+      </header>
+      <div class="review-body scroll-area">
+        <div class="review-stats">
+          <div class="review-stat">
+            <span class="review-stat-value" id="review-duration">00:00:00</span>
+            <span class="review-stat-label">Duraci&oacute;n</span>
+          </div>
+          <div class="review-stat-divider"></div>
+          <div class="review-stat">
+            <span class="review-stat-value" id="review-words">0</span>
+            <span class="review-stat-label">Palabras</span>
+          </div>
+        </div>
+
+        <div class="review-text-area">
+          <div class="review-text-header">
+            <span class="review-text-label">Texto transcrito</span>
+            <button id="btn-copy-review" class="copy-live-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copiar
+            </button>
+          </div>
+          <div id="review-text" class="review-text"></div>
+        </div>
+
+        <div class="review-save-section">
+          <input type="text" id="review-title" class="detail-title-input" placeholder="Titulo de la nota (opcional)">
+          <div class="review-project-row">
+            <span class="rec-project-label">Proyecto:</span>
+            <select id="review-project-select" class="rec-project-dropdown">
+              <option value="">Sin proyecto</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="review-actions">
+          <button id="btn-review-discard" class="review-btn discard">Descartar</button>
+          <button id="btn-review-save" class="review-btn save">Guardar nota</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ DETAIL VIEW ══════ -->
+    <div id="view-detail" class="view">
+      <header class="topbar">
+        <button class="icon-btn" id="btn-back-detail" aria-label="Volver">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        </button>
+        <h2 class="topbar-center" id="detail-title-display">Nota</h2>
+        <button class="icon-btn" id="btn-delete-note" aria-label="Eliminar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        </button>
+      </header>
+      <div class="detail-body scroll-area">
+        <input type="text" id="detail-title" class="detail-title-input" placeholder="Titulo de la nota">
+        <div class="detail-meta">
+          <span id="detail-date"></span>
+          <span class="meta-sep">&middot;</span>
+          <span id="detail-words"></span>
+          <span class="meta-sep">&middot;</span>
+          <span id="detail-duration"></span>
+        </div>
+        <div id="detail-text" class="detail-text" contenteditable="true"></div>
+        <div class="detail-actions">
+          <button class="action-pill" id="btn-copy-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copiar
+          </button>
+          <button class="action-pill" id="btn-share-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Compartir
+          </button>
+          <button class="action-pill" id="btn-download-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Descargar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ PROJECTS VIEW ══════ -->
+    <div id="view-projects" class="view">
+      <header class="topbar">
+        <h2 class="topbar-center" style="margin-left:12px">Proyectos</h2>
+        <button class="icon-btn" id="btn-add-project" aria-label="Nuevo proyecto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </header>
+      <div class="scroll-area">
+        <div id="projects-list" class="projects-list"></div>
+        <div id="projects-empty" class="empty-state">
+          <div class="empty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>Sin proyectos</h3>
+          <p>Crea un proyecto para organizar tus notas</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ SETTINGS VIEW ══════ -->
+    <div id="view-settings" class="view">
+      <header class="topbar">
+        <h2 class="topbar-center" style="margin-left:12px">Ajustes</h2>
+        <div style="width:40px"></div>
+      </header>
+      <div class="scroll-area">
+        <!-- Creator promo -->
+        <div class="settings-promo">
+          <div class="promo-avatar">E</div>
+          <div class="promo-info">
+            <span class="promo-name">@elalo417</span>
+            <span class="promo-desc">Sigueme para mas herramientas gratis</span>
+          </div>
+        </div>
+        <div class="promo-btns">
+          <a href="https://www.tiktok.com/@elalo417" target="_blank" rel="noopener noreferrer" class="promo-link tiktok">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.56a8.2 8.2 0 0 0 4.76 1.52V6.69h-1z"/></svg>
+            TikTok @elalo417
+          </a>
+          <a href="https://www.youtube.com/@elalo4177/videos" target="_blank" rel="noopener noreferrer" class="promo-link youtube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+            YouTube @elalo4177
+          </a>
+        </div>
+
+        <div class="settings-group">
+          <h3 class="settings-heading">General</h3>
+          <div class="setting-row">
+            <div class="setting-info">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span>Idioma</span>
+            </div>
+            <select id="setting-lang" class="setting-select">
+              <option value="es-ES">Espanol</option>
+              <option value="en-US">English</option>
+            </select>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/></svg>
+              <span>Modo oscuro</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="setting-dark">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <h3 class="settings-heading">Datos</h3>
+          <button class="setting-row setting-btn" id="btn-export-all">
+            <div class="setting-info">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Exportar todas las notas</span>
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <button class="setting-row setting-btn danger" id="btn-delete-all">
+            <div class="setting-info">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              <span>Borrar todos los datos</span>
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+
+        <div class="settings-footer">
+          <p>VoiceNotes v1.0 &middot; Hecho con la Web Speech API</p>
+          <p>Sin API keys &middot; 100% gratis</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ BOTTOM NAV ══════ -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-view="home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Inicio</span>
+      </button>
+      <button class="nav-item" data-view="projects">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <span>Proyectos</span>
+      </button>
+      <button class="nav-item record-tab" data-view="record">
+        <div class="record-fab">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+        </div>
+        <span>Grabar</span>
+      </button>
+      <button class="nav-item" data-view="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span>Ajustes</span>
+      </button>
+    </nav>
+
+    <!-- ══════ MODALS ══════ -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+      <div id="modal" class="modal">
+        <h3 id="modal-title"></h3>
+        <input type="text" id="modal-input" class="modal-input" placeholder="">
+        <div class="modal-actions">
+          <button id="modal-cancel" class="modal-btn cancel">Cancelar</button>
+          <button id="modal-confirm" class="modal-btn confirm">Guardar</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
