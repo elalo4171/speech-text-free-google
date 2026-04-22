@@ -161,39 +161,54 @@ function startSpeech() {
   // Android Chrome doesn't support continuous well — use single-shot + auto-restart
   recognition.continuous = !isAndroid;
 
+  const liveText = document.getElementById('live-text');
+
+  recognition.onaudiostart = () => {
+    liveText.textContent = 'Microfono activo, habla ahora...';
+  };
+  recognition.onspeechstart = () => {
+    liveText.textContent = 'Detectando voz...';
+  };
   recognition.onresult = (e) => {
     let interim = '';
     for (let i = e.resultIndex; i < e.results.length; i++) {
       if (e.results[i].isFinal) finalTranscript += e.results[i][0].transcript + ' ';
       else interim += e.results[i][0].transcript;
     }
-    document.getElementById('live-text').textContent = interim || finalTranscript.slice(-100) || 'Esperando voz...';
+    liveText.textContent = interim || finalTranscript.slice(-100) || 'Esperando voz...';
   };
   recognition.onerror = (e) => {
     if (e.error === 'not-allowed') {
+      liveText.textContent = 'Permiso de microfono denegado. Revisa los permisos del navegador.';
       toast('Permiso de microfono denegado');
+    } else if (e.error === 'network') {
+      liveText.textContent = 'Error de red. Se requiere conexion a internet.';
+      toast('Error de red');
+    } else if (e.error === 'service-not-allowed') {
+      liveText.textContent = 'Servicio de voz no disponible en este navegador.';
+      toast('Servicio no disponible');
     } else if (e.error !== 'aborted' && e.error !== 'no-speech') {
+      liveText.textContent = 'Error: ' + e.error;
       toast('Error: ' + e.error);
     }
-    // On Android, 'no-speech' triggers often — just restart
   };
   recognition.onend = () => {
     if (isRecording && !isPaused) {
-      // Restart recognition — on Android this happens after every phrase
       try {
         recognition.start();
       } catch {
-        // If start fails, create a fresh instance
         setTimeout(() => {
           if (isRecording && !isPaused) startSpeech();
-        }, 100);
+        }, 300);
       }
     }
   };
   try {
     recognition.start();
+    liveText.textContent = 'Iniciando microfono...';
   } catch (e) {
-    toast('Error al iniciar microfono: ' + e.message);
+    liveText.textContent = 'Error: ' + e.message;
+    toast('Error al iniciar: ' + e.message);
   }
 }
 
