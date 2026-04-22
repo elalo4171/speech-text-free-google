@@ -130,10 +130,21 @@ function startRecording() {
   document.getElementById('timer').textContent = '00:00:00';
   updateRecStatus('recording');
   populateProjectDropdown();
-  startSpeech();
-  startTimer();
-  startWaveform();
-  isRecording = true;
+
+  // Request mic permission first, then start everything
+  navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+    mediaStream = stream;
+    startSpeech();
+    startTimer();
+    startWaveform(stream);
+    isRecording = true;
+  }).catch(() => {
+    // If getUserMedia fails, still try speech recognition alone
+    startSpeech();
+    startTimer();
+    startFallbackWaveform();
+    isRecording = true;
+  });
 }
 
 function startSpeech() {
@@ -152,8 +163,12 @@ function startSpeech() {
   recognition.onerror = (e) => {
     if (e.error !== 'aborted' && e.error !== 'no-speech') toast('Error: ' + e.error);
   };
-  recognition.onend = () => { if (isRecording && !isPaused) try { recognition.start(); } catch {} };
-  try { recognition.start(); } catch {}
+  recognition.onend = () => {
+    if (isRecording && !isPaused) {
+      try { recognition.start(); } catch {}
+    }
+  };
+  try { recognition.start(); } catch (e) { toast('Error al iniciar: ' + e.message); }
 }
 
 function startTimer() {
@@ -166,21 +181,52 @@ function startTimer() {
   }, 200);
 }
 
-function startWaveform() {
+function startWaveform(stream) {
   const canvas = document.getElementById('waveform');
   const ctx = canvas.getContext('2d');
   canvas.width = canvas.offsetWidth * 2;
   canvas.height = canvas.offsetHeight * 2;
 
-  navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-    mediaStream = stream;
+  try {
     audioCtx = new AudioContext();
     const source = audioCtx.createMediaStreamSource(stream);
     analyser = audioCtx.createAnalyser();
     analyser.fftSize = 128;
     source.connect(analyser);
     drawWaveform(canvas, ctx);
-  }).catch(() => {});
+  } catch {
+    startFallbackWaveform();
+  }
+}
+
+function startFallbackWaveform() {
+  // Simple animated bars when real audio data isn't available
+  const canvas = document.getElementById('waveform');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth * 2;
+  canvas.height = canvas.offsetHeight * 2;
+  const w = canvas.width, h = canvas.height;
+  const barCount = 40;
+  const barWidth = w / barCount * 0.6;
+  const gap = w / barCount * 0.4;
+
+  function draw() {
+    animFrameId = requestAnimationFrame(draw);
+    ctx.clearRect(0, 0, w, h);
+    const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+    ctx.fillStyle = accent || '#f97316';
+    const t = Date.now() / 1000;
+    for (let i = 0; i < barCount; i++) {
+      const val = 0.15 + 0.25 * Math.sin(t * 3 + i * 0.5) + 0.1 * Math.sin(t * 7 + i);
+      const barH = Math.max(4, val * h * 0.8);
+      const x = i * (barWidth + gap) + gap / 2;
+      const y = (h - barH) / 2;
+      ctx.beginPath();
+      ctx.roundRect(x, y, barWidth, barH, 2);
+      ctx.fill();
+    }
+  }
+  draw();
 }
 
 function drawWaveform(canvas, ctx) {
