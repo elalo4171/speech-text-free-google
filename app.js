@@ -131,20 +131,24 @@ function startRecording() {
   updateRecStatus('recording');
   populateProjectDropdown();
 
-  // Request mic permission first, then start everything
-  navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-    mediaStream = stream;
-    startSpeech();
-    startTimer();
-    startWaveform(stream);
-    isRecording = true;
-  }).catch(() => {
-    // If getUserMedia fails, still try speech recognition alone
-    startSpeech();
-    startTimer();
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  startSpeech();
+  startTimer();
+  isRecording = true;
+
+  if (isMobile) {
+    // Mobile: getUserMedia conflicts with SpeechRecognition, use animated waveform
     startFallbackWaveform();
-    isRecording = true;
-  });
+  } else {
+    // Desktop: use real audio waveform
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+      mediaStream = stream;
+      startWaveform(stream);
+    }).catch(() => {
+      startFallbackWaveform();
+    });
+  }
 }
 
 function startSpeech() {
