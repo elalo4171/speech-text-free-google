@@ -151,11 +151,16 @@ function startRecording() {
   }
 }
 
+const isAndroid = /Android/i.test(navigator.userAgent);
+
 function startSpeech() {
   recognition = new SpeechRecognition();
   recognition.lang = document.getElementById('setting-lang').value;
-  recognition.continuous = true;
   recognition.interimResults = true;
+
+  // Android Chrome doesn't support continuous well — use single-shot + auto-restart
+  recognition.continuous = !isAndroid;
+
   recognition.onresult = (e) => {
     let interim = '';
     for (let i = e.resultIndex; i < e.results.length; i++) {
@@ -165,14 +170,31 @@ function startSpeech() {
     document.getElementById('live-text').textContent = interim || finalTranscript.slice(-100) || 'Esperando voz...';
   };
   recognition.onerror = (e) => {
-    if (e.error !== 'aborted' && e.error !== 'no-speech') toast('Error: ' + e.error);
+    if (e.error === 'not-allowed') {
+      toast('Permiso de microfono denegado');
+    } else if (e.error !== 'aborted' && e.error !== 'no-speech') {
+      toast('Error: ' + e.error);
+    }
+    // On Android, 'no-speech' triggers often — just restart
   };
   recognition.onend = () => {
     if (isRecording && !isPaused) {
-      try { recognition.start(); } catch {}
+      // Restart recognition — on Android this happens after every phrase
+      try {
+        recognition.start();
+      } catch {
+        // If start fails, create a fresh instance
+        setTimeout(() => {
+          if (isRecording && !isPaused) startSpeech();
+        }, 100);
+      }
     }
   };
-  try { recognition.start(); } catch (e) { toast('Error al iniciar: ' + e.message); }
+  try {
+    recognition.start();
+  } catch (e) {
+    toast('Error al iniciar microfono: ' + e.message);
+  }
 }
 
 function startTimer() {
